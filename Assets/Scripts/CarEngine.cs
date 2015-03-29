@@ -16,7 +16,7 @@ public class CarEngine : MonoBehaviour {
 	float minTorque = 10f;
 	float maxTorque = 30f;
 	
-	private float[] gearRatios = {0f, 6f, 3.5f, 2.5f};//TODO: Make need to make it 6 gears
+	private float[] gearRatios = {0f, 6f, 3.5f, 2.5f};//TODO: Make need to make it 6 gears, I'll check for better ger ratios.
 
 
 	void Update ()
@@ -25,7 +25,7 @@ public class CarEngine : MonoBehaviour {
 		UpdateEngine();
 		
 		// Set torque on wheels and steering etc
-		UpdateCar();
+		UpdateCar(); //Need to make this function.
 	}
 	
 	
@@ -36,7 +36,7 @@ public class CarEngine : MonoBehaviour {
 		
 		// Find RPM of wheels
 		float wheelRPM = 0f;
-		foreach (WheelCollider w in powerWheels)
+		foreach (WheelCollider w in powerWheels) //TODO: need to assign a static variable for the wheels
 		{
 			wheelRPM += w.rpm;
 		}
