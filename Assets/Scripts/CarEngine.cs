@@ -25,7 +25,7 @@ public class CarEngine : MonoBehaviour {
 		UpdateEngine();
 		
 		// Set torque on wheels and steering etc
-		UpdateCar(); //Need to make this function.
+		//UpdateCar(); //Need to make this function.
 	}
 	
 	
@@ -36,12 +36,13 @@ public class CarEngine : MonoBehaviour {
 		
 		// Find RPM of wheels
 		float wheelRPM = 0f;
+		/*
 		foreach (WheelCollider w in powerWheels) //TODO: need to assign a static variable for the wheels
 		{
 			wheelRPM += w.rpm;
 		}
 		wheelRPM /= powerWheels.Length;
-		
+		*/
 		if (_gear > 0)
 		{
 			// How fast the shaft is turning at the engine end
