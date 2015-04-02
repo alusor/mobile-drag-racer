@@ -1,6 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+ * TODO: read up on each:
+ * 
+ * 1.	Grip is a term describing the total cornering envelope of a race car by the friction of the tire as a function of i.a. 
+ * 		the mass of the machine and the downforce generated.
+ *
+ * 2.	http://en.wikipedia.org/wiki/Acceleration
+ * 3.	http://phors.locost7.info/phors01.htm
+ *
+ *
+ *The RPM to Linear Velocity formular is : 
+  v = r × RPM × 0.10472
+
+Where:
+  v: Linear velocity, in m/s
+  r: Radius, in meter
+  RPM: Angular velocity, in RPM (Rounds per Minute)
+ *
+ */
+
 public class CarEngine : MonoBehaviour {
 
 	float _power = 0f;
