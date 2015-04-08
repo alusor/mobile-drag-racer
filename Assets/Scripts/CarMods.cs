@@ -4,9 +4,9 @@ using System.Collections;
 public class CarMods : MonoBehaviour {
 
 	//These are the stock car stats.
-	public float acceleration 	= 2.5f;
-	public float grip 			= 2.5f;
-	public float weight 		= 2.5f;
+	public float acceleration = 2.5f;
+	public float grip = 2.5f;
+	public float weight = 2.5f;
 
 	//These are the parts installed currently. These are stand-ins
 	public bool part1Installed = false;

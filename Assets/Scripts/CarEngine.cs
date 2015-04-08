@@ -23,21 +23,29 @@ Where:
 
 public class CarEngine : MonoBehaviour {
 
-	float _power = 0f;
-	int _gear = 0;
-	float _engineRPM = 0f;
+	private CarMods carModsScript;
+
+	private float _power = 0f;
+	public int _gear = 0; //set to public temporarily for testing
+	private float _engineRPM = 0f;
 	
-	float _wheelTorque;
+	private float _wheelTorque;
 	
-	float minRPM = 200f;
-	float peakRPM = 800f;
-	float maxRPM = 1000f;
+	private	float minRPM = 200f;
+	private float peakRPM = 800f;
+	private float maxRPM = 1000f;
 	
-	float minTorque = 10f;
-	float maxTorque = 30f;
+	private float minTorque = 10f;
+	private float maxTorque = 30f;
 	
 	private float[] gearRatios = {0f, 6f, 3.5f, 2.5f};//TODO: Make need to make it 6 gears, I'll check for better ger ratios.
+	private float tempNum = 0.0f;
 
+	void Awake ()
+	{
+		carModsScript = GetComponent<CarMods>();
+		_power = 0.05f;
+	}
 
 	void Update ()
 	{      
@@ -45,9 +53,17 @@ public class CarEngine : MonoBehaviour {
 		UpdateEngine();
 		
 		// Set torque on wheels and steering etc
-		//UpdateCar(); //Need to make this function.
+		UpdateCar();
 	}
-	
+
+	public void UpdateCar()
+	{
+		tempNum = _wheelTorque * _engineRPM * 0.10472f * Time.deltaTime;
+		Debug.Log("tempNum is " + tempNum);
+		Debug.Log("_wheelTorque is " + _wheelTorque);
+		//Debug.Log("_engineRPM is " + _engineRPM);
+		transform.Translate(Vector3.right * tempNum); //The magic number is from formula
+	}
 	
 	public void UpdateEngine()
 	{
@@ -63,6 +79,9 @@ public class CarEngine : MonoBehaviour {
 		}
 		wheelRPM /= powerWheels.Length;
 		*/
+		//Let see if I can replace the above code with my own:
+		wheelRPM = 4 * carModsScript.grip; //There is 4 wheels
+
 		if (_gear > 0)
 		{
 			// How fast the shaft is turning at the engine end
@@ -73,7 +92,7 @@ public class CarEngine : MonoBehaviour {
 			_engineRPM = Mathf.MoveTowards(_engineRPM, rpmToEngine, Time.deltaTime * (maxRPM - minRPM));
 			
 			// Torque to the wheels is a function of the RPM, multiplied by the power. The gear then multiplies this torque again.
-			_wheelTorque = GetEngineTorqueFromRPM(_engineRPM) * _power * gearRatios[_gear];                
+			_wheelTorque = GetEngineTorqueFromRPM(_engineRPM) * _power * gearRatios[_gear];               
 		}
 		else
 		{
